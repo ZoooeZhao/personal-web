@@ -1,65 +1,76 @@
-# Flocker Case Study Assets
+# Flocker Image Replacement Guide
 
-The new detail page is `flocker.html`. Its content comes from https://www.zoezhaochen.com/flocker. The original image CDN was inaccessible during implementation, so only the existing homepage cover is currently real imagery. Other visuals are explicitly labeled placeholders.
+All 62 case-study images from the original page have one numbered slot each. Numbers match original source order and remain stable even when the new page reorders sections. Shared site logos/social icons are handled by the shared header/footer.
 
-`docs/content/flocker-source.txt` retains the extracted source copy. `docs/content/flocker-assets.json` lists original image URLs and source filenames. `docs/content/flocker-placeholders.json` lists every replacement slot.
+The page tries the original image URL and keeps a labeled placeholder if the image is unavailable. Image 01 falls back to the uploaded homepage cover. Source URLs and original filenames are preserved below.
 
-## Replacing A Placeholder
+## Replace An Image
 
-Upload the corresponding file to this folder, then replace the `.asset-slot` inside its `<figure data-case-asset="…">` in `flocker.html` with an image using class `asset-image`, a descriptive alt, width/height, and `loading="lazy"`. Keep the existing caption. Assets under this folder are copied into the production build. Do not replace a placeholder with a generic invented screen or present it as the original product UI.
+Upload a replacement here named `image-01.png`, `image-02.webp`, etc. Use the displayed number, with two digits. Supported formats: PNG, WebP, JPG, JPEG, SVG, GIF. Prefer one file per number. On the next build, `scripts/prepare-case-images.mjs` matches local files to slots, so no HTML editing is required. PNG/WebP/JPG replacements also work for slots whose original is a GIF. Keep source aspect ratios unless intentionally redesigning a figure.
 
-| Slot | Suggested Filename | Content |
-| --- | --- | --- |
-| `survey-meet-friends` | `survey-meet-friends.png` | Survey Results: How often do you typically meet up with friends in person? |
-| `survey-find-events` | `survey-find-events.png` | Survey Results: How do you typically find out about events you are interested in? |
-| `survey-go-with-friends` | `survey-go-with-friends.png` | Survey Results: Would you go out more often if you could find potential or existing friends already doing things that match your interests? |
-| `survey-friend-attendance` | `survey-friend-attendance.png` | Survey Results: Would you like to see what events your friends are interested in or are planning to attend? |
-| `user-journey` | `user-journey.png` | User Journey: Problem, Result, And Solution |
-| `event-type-categories` | `event-type-categories.png` | Event-Type Categories |
-| `mood-based-categories` | `mood-based-categories.png` | Mood-Based Categories |
-| `swipe-demo` | `swipe-demo.png` | Swipable Event Cards |
-| `onboarding-interests` | `onboarding-interests.png` | Sign-Up Interests |
-| `mood-discovery` | `mood-discovery.png` | Mood-Based Recommendations |
-| `event-card-final` | `event-card-final.png` | Event Discovery: Final Card |
-| `event-card-rsvp` | `event-card-rsvp.png` | Event Discovery: RSVP |
-| `event-card-early` | `event-card-early.png` | Early Event Card |
-| `event-card-profile` | `event-card-profile.png` | Profile Access Exploration |
-| `event-card-layout` | `event-card-layout.png` | Event Card Layout Exploration |
-| `event-card-text` | `event-card-text.png` | Text Hierarchy Exploration |
-| `event-card-lfg` | `event-card-lfg.png` | Friend Matching Exploration |
-| `event-browser-final` | `event-browser-final.png` | Browse Events |
-| `event-map-final` | `event-map-final.png` | Map And Heatmap |
-| `browser-drawer` | `browser-drawer.png` | Original Drawer |
-| `browser-picture-text` | `browser-picture-text.png` | Picture And Text Exploration |
-| `browser-card` | `browser-card.png` | Floating Event Card |
-| `map-distant` | `map-distant.png` | Map: Distant View |
-| `map-close` | `map-close.png` | Map: Close View |
-| `map-categories` | `map-categories.png` | Category Colors |
-| `calendar-final` | `calendar-final.png` | Calendar And Weather |
-| `calendar-detail-final` | `calendar-detail-final.png` | Event Details In Calendar |
-| `calendar-old` | `calendar-old.png` | Earlier Calendar UI |
-| `calendar-month` | `calendar-month.png` | Calendar Layout Exploration |
-| `calendar-day` | `calendar-day.png` | Day View Exploration |
-| `calendar-event` | `calendar-event.png` | Event Detail View |
-| `calendar-weather` | `calendar-weather.png` | Weather Integration |
-| `attendees-final` | `attendees-final.png` | Manage Attendees |
-| `attendee-profile-final` | `attendee-profile-final.png` | Attendee Profile Card |
-| `attendees-all` | `attendees-all.png` | All Attendees |
-| `attendees-match` | `attendees-match.png` | Attendee Matching |
-| `attendees-card` | `attendees-card.png` | Profile Card Exploration |
-| `attendees-list` | `attendees-list.png` | List View Exploration |
-| `attendees-public` | `attendees-public.png` | Public Profile Exploration |
-| `chat-a` | `chat-a.png` | Chat: Screen One |
-| `chat-b` | `chat-b.png` | Chat: Screen Two |
-| `event-detail-a` | `event-detail-a.png` | Event Detail: Screen One |
-| `event-detail-b` | `event-detail-b.png` | Event Detail: Screen Two |
-| `post-feed-a` | `post-feed-a.png` | Post Feed: Screen One |
-| `post-feed-b` | `post-feed-b.png` | Post Feed: Screen Two |
-| `event-check-in-a` | `event-check-in-a.png` | Event Check-In: Screen One |
-| `event-check-in-b` | `event-check-in-b.png` | Event Check-In: Screen Two |
-| `filter-a` | `filter-a.png` | Filter: Screen One |
-| `filter-b` | `filter-b.png` | Filter: Screen Two |
-| `ai-image-generation-a` | `ai-image-generation-a.png` | AI Image Generation: Screen One |
-| `ai-image-generation-b` | `ai-image-generation-b.png` | AI Image Generation: Screen Two |
-| `sign-up-a` | `sign-up-a.png` | Sign Up: Screen One |
-| `sign-up-b` | `sign-up-b.png` | Sign Up: Screen Two |
+The same matching runs in the Vite development server. Images always retain their displayed number and caption.
+
+| Number | New Page Label | Original Filename | Original Image |
+| --- | --- | --- | --- |
+| 01 | Flocker Project Cover | Frame 1 (5).png | [Source](https://static.wixstatic.com/media/61817c_738102193f9242ceb3006139cb7c4b07~mv2.png) |
+| 02 | Youth And Real-Life Connection | (unnamed) | [Source](https://static.wixstatic.com/media/61817c_ff33826d3273439e8126e9adcb520b42~mv2.png/v1/fill/w_784,h_146,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/61817c_ff33826d3273439e8126e9adcb520b42~mv2.png) |
+| 03 | Swipable Event Cards Prototype | shorter.gif | [Source](https://static.wixstatic.com/media/61817c_ad6b19c4cae64e77b931d370cc8d6edd~mv2.gif) |
+| 04 | Event Discovery Screen | 🖼️ PLACE YOUR SCREEN HERE (47).png | [Source](https://static.wixstatic.com/media/61817c_86e54c0dba4f4714bb97aea8a8e491fb~mv2.png/v1/fill/w_178,h_368,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(47).png) |
+| 05 | Personalization Screen | 🖼️ PLACE YOUR SCREEN HERE (48).png | [Source](https://static.wixstatic.com/media/61817c_8571a4486b694d619cce465b54d3a523~mv2.png/v1/fill/w_178,h_368,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(48).png) |
+| 06 | Personalization Prototype | Kapture 2025-04-07 at 00.20.28.gif | [Source](https://static.wixstatic.com/media/61817c_72edc536e3e14429b1b0f018afe9b9af~mv2.gif) |
+| 07 | Discovery Prototype | Kapture 2025-04-07 at 11.23.48.gif | [Source](https://static.wixstatic.com/media/61817c_0d3cb8fa24bf4ac8aefdc9082eb969c8~mv2.gif) |
+| 08 | Event-Type Categories | Frame 1000002952 (2).png | [Source](https://static.wixstatic.com/media/61817c_ba979fe29d214ad0ac9f3f96b74788e4~mv2.png/v1/fill/w_226,h_332,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Frame%201000002952%20(2).png) |
+| 09 | Mood-Based Categories | Frame 1000002952.png | [Source](https://static.wixstatic.com/media/61817c_e278b69eaaca431d8d3d09e4d5487557~mv2.png/v1/fill/w_226,h_332,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Frame%201000002952.png) |
+| 10 | Event Discovery Research Overview | 屏幕截图 2024-07-23 020254.png | [Source](https://static.wixstatic.com/media/61817c_abf1e59163684fd1b2a421ca7c750beb~mv2.png/v1/fill/w_600,h_188,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-07-23%20020254.png) |
+| 11 | Survey Chart | Group 133594.png | [Source](https://static.wixstatic.com/media/61817c_70e7c77875a54ee5be0eca1021baf1d3~mv2.png/v1/fill/w_234,h_201,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Group%20133594.png) |
+| 12 | Survey Detail | output (1).png | [Source](https://static.wixstatic.com/media/61817c_0525db3a129d4081849555454436eea7~mv2.png/v1/crop/x_1353,y_329,w_651,h_309/fill/w_163,h_77,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/output%20(1).png) |
+| 13 | Survey Chart | output (8).png | [Source](https://static.wixstatic.com/media/61817c_b144869488074295b41d1e3896e03ad0~mv2.png/v1/fill/w_456,h_271,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/output%20(8).png) |
+| 14 | Survey Detail | output (2).png | [Source](https://static.wixstatic.com/media/61817c_5d667774132b48148480c82cbc16615e~mv2.png/v1/crop/x_1430,y_353,w_879,h_264/fill/w_221,h_66,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/output%20(2).png) |
+| 15 | Survey Chart | Group 133595.png | [Source](https://static.wixstatic.com/media/61817c_51c32b6cfdfb4f1885fc5887c2062bfa~mv2.png/v1/crop/x_680,y_14,w_3109,h_2374/fill/w_221,h_170,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Group%20133595.png) |
+| 16 | Survey Chart | Group 133596.png | [Source](https://static.wixstatic.com/media/61817c_e0f87192692b4560928dbb9e04ff7b5c~mv2.png/v1/crop/x_955,y_0,w_2806,h_2564/fill/w_188,h_172,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Group%20133596.png) |
+| 17 | Survey Detail | output (9).png | [Source](https://static.wixstatic.com/media/61817c_ad9bbc2ae333493e9b48e0cb73112f28~mv2.png/v1/crop/x_2004,y_683,w_243,h_217/fill/w_74,h_66,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/output%20(9).png) |
+| 18 | User Journey: Problem, Result, And Solution | user journey (1).png | [Source](https://static.wixstatic.com/media/61817c_7dbdac3d36fc44df805e73050ce4b917~mv2.png/v1/crop/x_122,y_113,w_8315,h_4166/fill/w_955,h_478,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/user%20journey%20(1).png) |
+| 19 | Event Discovery: Final Card | 🖼️ PLACE YOUR SCREEN HERE (1).png | [Source](https://static.wixstatic.com/media/61817c_8a8699fb7fec43b3972f5924a7f706e9~mv2.png/v1/fill/w_220,h_454,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(1).png) |
+| 20 | Event Discovery: RSVP | 🖼️ PLACE YOUR SCREEN HERE.png | [Source](https://static.wixstatic.com/media/61817c_f03de276fd0f479b90f0331c7b082dd0~mv2.png/v1/fill/w_220,h_454,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE.png) |
+| 21 | Early Event Card | Frame 1000003049.png | [Source](https://static.wixstatic.com/media/61817c_178f8d37d943467195da6cac50e8088f~mv2.png/v1/crop/x_0,y_0,w_373,h_788/fill/w_157,h_331,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Frame%201000003049.png) |
+| 22 | Profile Access Exploration | iPhone 14 & 15 Pro - 17.png | [Source](https://static.wixstatic.com/media/61817c_1403338c1d444044ba8cd945a3dd00f0~mv2.png/v1/fill/w_157,h_338,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/iPhone%2014%20%26%2015%20Pro%20-%2017.png) |
+| 23 | Event Card Layout Exploration | iPhone 14 & 15 Pro - 22.png | [Source](https://static.wixstatic.com/media/61817c_036acc9d9dd24222b0eb4426b8e3a2d1~mv2.png/v1/fill/w_157,h_338,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/iPhone%2014%20%26%2015%20Pro%20-%2022.png) |
+| 24 | Text Hierarchy Exploration | Final_ecentcard_text.png | [Source](https://static.wixstatic.com/media/61817c_f050a153a3754a7d9c668a2e00616de9~mv2.png/v1/fill/w_157,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Final_ecentcard_text.png) |
+| 25 | Friend Matching Exploration | Final_eventcard_LFG (9).png | [Source](https://static.wixstatic.com/media/61817c_8c7d00c79a644eb48fdd7af9b3e17cbe~mv2.png/v1/fill/w_157,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Final_eventcard_LFG%20(9).png) |
+| 26 | Browse Events | 🖼️ PLACE YOUR SCREEN HERE (6).png | [Source](https://static.wixstatic.com/media/61817c_5c53e5e8997e472290c38ee8f561e2c3~mv2.png/v1/fill/w_220,h_454,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(6).png) |
+| 27 | Map And Heatmap | 🖼️ PLACE YOUR SCREEN HERE (8).png | [Source](https://static.wixstatic.com/media/61817c_60bd1cd94e88484793f2b4baeeea1056~mv2.png/v1/fill/w_220,h_454,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(8).png) |
+| 28 | Original Drawer | Frame 1000003050.png | [Source](https://static.wixstatic.com/media/61817c_843ee020f4294cebaefb1a342a2b5feb~mv2.png/v1/fill/w_151,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Frame%201000003050.png) |
+| 29 | Picture And Text Exploration | picture+text.png | [Source](https://static.wixstatic.com/media/61817c_78a5a1ed45a14be59b2ef0869488807b~mv2.png/v1/fill/w_151,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/picture%2Btext.png) |
+| 30 | Floating Event Card | picture+text (1).png | [Source](https://static.wixstatic.com/media/61817c_62f0bb81cfdb418aab4986f15848dd05~mv2.png/v1/fill/w_151,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/picture%2Btext%20(1).png) |
+| 31 | Map: Distant View | map page_distant (1).png | [Source](https://static.wixstatic.com/media/61817c_b249475dff2e41118bb5918b7a45477d~mv2.png/v1/fill/w_151,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/map%20page_distant%20(1).png) |
+| 32 | Map: Close View | map page_close (1).png | [Source](https://static.wixstatic.com/media/61817c_58074fdae89a4c36bff4e82a686caa1a~mv2.png/v1/fill/w_151,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/map%20page_close%20(1).png) |
+| 33 | Category Colors | map page_close.png | [Source](https://static.wixstatic.com/media/61817c_749de9b6e3844a8e9a054deccd9024e4~mv2.png/v1/fill/w_151,h_331,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/map%20page_close.png) |
+| 34 | Calendar And Weather | 🖼️ PLACE YOUR SCREEN HERE (13).png | [Source](https://static.wixstatic.com/media/61817c_5eef1e8dfebb45db946ba6d643136243~mv2.png/v1/fill/w_220,h_454,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(13).png) |
+| 35 | Event Details In Calendar | 🖼️ PLACE YOUR SCREEN HERE (15).png | [Source](https://static.wixstatic.com/media/61817c_03ce582b4e8e4043b48eb5fd50b9c075~mv2.png/v1/fill/w_220,h_454,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(15).png) |
+| 36 | Earlier Calendar UI | Final_eventcard_LFG (13).png | [Source](https://static.wixstatic.com/media/61817c_678ba354b88f4d41a94b171231e75e2e~mv2.png/v1/fill/w_156,h_338,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Final_eventcard_LFG%20(13).png) |
+| 37 | Calendar Layout Exploration | Final_eventcard_LFG (12).png | [Source](https://static.wixstatic.com/media/61817c_c890e0f5b63c4728883577d2cc225e0e~mv2.png/v1/fill/w_157,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Final_eventcard_LFG%20(12).png) |
+| 38 | Day View Exploration | Final_eventcard_LFG (14).png | [Source](https://static.wixstatic.com/media/61817c_df5835546a574187909fb1eaa4d83eba~mv2.png/v1/fill/w_156,h_338,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Final_eventcard_LFG%20(14).png) |
+| 39 | Event Detail View | Final_eventcard_LFG (17).png | [Source](https://static.wixstatic.com/media/61817c_9bb6103d1085475facb76f8c3c283a0c~mv2.png/v1/fill/w_156,h_338,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Final_eventcard_LFG%20(17).png) |
+| 40 | Weather Integration | Final_eventcard_LFG (15).png | [Source](https://static.wixstatic.com/media/61817c_8cb4a57a0e2d46658be7dfb4e42c021d~mv2.png/v1/fill/w_165,h_338,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Final_eventcard_LFG%20(15).png) |
+| 41 | Manage Attendees | 🖼️ PLACE YOUR SCREEN HERE (12).png | [Source](https://static.wixstatic.com/media/61817c_0d086189c4334fdf8687213818432699~mv2.png/v1/fill/w_220,h_454,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(12).png) |
+| 42 | Attendee Profile Card | 🖼️ PLACE YOUR SCREEN HERE (11).png | [Source](https://static.wixstatic.com/media/61817c_3cd1746008fa47f0b8e2e416037f92dc~mv2.png/v1/fill/w_220,h_454,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(11).png) |
+| 43 | All Attendees | chat page.png | [Source](https://static.wixstatic.com/media/61817c_48ba77a9b152410fbf128e0c38d38dd9~mv2.png/v1/fill/w_151,h_327,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/chat%20page.png) |
+| 44 | Attendee Matching | create event_final (1).png | [Source](https://static.wixstatic.com/media/61817c_290f4d1fe2d2498f8b6165d141bdd97b~mv2.png/v1/fill/w_156,h_338,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/create%20event_final%20(1).png) |
+| 45 | Profile Card Exploration | create event_final.png | [Source](https://static.wixstatic.com/media/61817c_db45c3c732c9441a8a1717c208fd669b~mv2.png/v1/fill/w_156,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/create%20event_final.png) |
+| 46 | List View Exploration | profile-personal view.png | [Source](https://static.wixstatic.com/media/61817c_79506cbf342f4274814d9593aba5ebdd~mv2.png/v1/fill/w_157,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/profile-personal%20view.png) |
+| 47 | Public Profile Exploration | profile-public view (unfollowed).png | [Source](https://static.wixstatic.com/media/61817c_148d74a28b5543e3bbbf045f9744d789~mv2.png/v1/fill/w_157,h_340,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/profile-public%20view%20(unfollowed).png) |
+| 48 | Chat: Screen 1 | 🖼️ PLACE YOUR SCREEN HERE (26).png | [Source](https://static.wixstatic.com/media/61817c_d10541a105fe432194c781defd58fd18~mv2.png/v1/fill/w_151,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(26).png) |
+| 49 | Chat: Screen 2 | 🖼️ PLACE YOUR SCREEN HERE (27).png | [Source](https://static.wixstatic.com/media/61817c_e66444ab57f8461eb65f745df5652775~mv2.png/v1/fill/w_156,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(27).png) |
+| 50 | Event Detail: Screen 1 | 🖼️ PLACE YOUR SCREEN HERE (28).png | [Source](https://static.wixstatic.com/media/61817c_7481dfde5cff43c4ba309c492c5f320d~mv2.png/v1/fill/w_156,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(28).png) |
+| 51 | Event Detail: Screen 2 | 🖼️ PLACE YOUR SCREEN HERE (29).png | [Source](https://static.wixstatic.com/media/61817c_e2d71b661a22470ebc49d2cad51778d0~mv2.png/v1/fill/w_157,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(29).png) |
+| 52 | Post Feed: Screen 1 | 🖼️ PLACE YOUR SCREEN HERE (30).png | [Source](https://static.wixstatic.com/media/61817c_29f7a26421744819b880d918d4cc83f1~mv2.png/v1/fill/w_157,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(30).png) |
+| 53 | Post Feed: Screen 2 | 🖼️ PLACE YOUR SCREEN HERE (32).png | [Source](https://static.wixstatic.com/media/61817c_8eb8fe734e0e4f3e911516961c4a5704~mv2.png/v1/fill/w_151,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(32).png) |
+| 54 | Event Check-In: Screen 1 | 🖼️ PLACE YOUR SCREEN HERE (33).png | [Source](https://static.wixstatic.com/media/61817c_22a9e42cc3e84ff4a3f8d57e1abd8c2a~mv2.png/v1/fill/w_156,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(33).png) |
+| 55 | Event Check-In: Screen 2 | 🖼️ PLACE YOUR SCREEN HERE (36).png | [Source](https://static.wixstatic.com/media/61817c_0a7d5a97e6eb45ca99f4cd9205a7949c~mv2.png/v1/fill/w_156,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(36).png) |
+| 56 | Filter: Screen 1 | 🖼️ PLACE YOUR SCREEN HERE (34).png | [Source](https://static.wixstatic.com/media/61817c_926f74ec225843c1ae2fa48ce26fac54~mv2.png/v1/fill/w_157,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(34).png) |
+| 57 | Filter: Screen 2 | 🖼️ PLACE YOUR SCREEN HERE (37).png | [Source](https://static.wixstatic.com/media/61817c_2a6a35d2d3a846aa9cb3b5086576b634~mv2.png/v1/fill/w_157,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(37).png) |
+| 58 | AI Image Generation: Screen 1 | 🖼️ PLACE YOUR SCREEN HERE (42).png | [Source](https://static.wixstatic.com/media/61817c_4719688866da4f9da80c09d09b35ea71~mv2.png/v1/fill/w_151,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(42).png) |
+| 59 | AI Image Generation: Screen 2 | 🖼️ PLACE YOUR SCREEN HERE (41).png | [Source](https://static.wixstatic.com/media/61817c_25e283834eda427a9cee5c34512dd0b3~mv2.png/v1/fill/w_156,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(41).png) |
+| 60 | Sign Up: Screen 1 | 🖼️ PLACE YOUR SCREEN HERE (40).png | [Source](https://static.wixstatic.com/media/61817c_7723f72d6ec5444fbb21c8bc6694f5ab~mv2.png/v1/fill/w_156,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(40).png) |
+| 61 | Sign Up: Screen 2 | 🖼️ PLACE YOUR SCREEN HERE (39).png | [Source](https://static.wixstatic.com/media/61817c_0a0182184495460b83ca32b97411ee1f~mv2.png/v1/fill/w_157,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(39).png) |
+| 62 | Sign Up: Screen 3 | 🖼️ PLACE YOUR SCREEN HERE (38).png | [Source](https://static.wixstatic.com/media/61817c_0b82977ac897477fa084a8a4ac75d400~mv2.png/v1/fill/w_157,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(38).png) |
