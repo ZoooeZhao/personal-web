@@ -4,6 +4,8 @@ There are now 64 numbered image slots. Original Image 02 is split into three pan
 
 The original source inventory is retained in docs/content/flocker-assets.json. Original URLs load where available; unavailable images keep their numbered placeholders.
 
+The Process section has been removed. It contained no image slots, so the numbering remains complete at 01–64 without gaps.
+
 ## Replacing An Image
 
 Upload `image-02.png`, `image-03.png`, or `image-04.png` as separate, already-cropped replacements for the infographic panels. Local replacements will not be cropped a second time. The three original-source panels are cropped from the existing horizontal infographic automatically.
