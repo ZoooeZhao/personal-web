@@ -1,10 +1,10 @@
 # Flocker Image Replacement Guide
 
-There are now 64 numbered image slots. Original Image 02 is split into three panels: new Images 02, 03, and 04. Every old image from 03 onward moves up by two (old 03 → new 05, old 62 → new 64). Image 01 is unchanged.
+There are now 65 numbered image slots. New Image 65 is the Impact image; existing slots 01–64 keep their numbers. Original Image 02 is split into three panels: new Images 02, 03, and 04. Every old image from 03 onward moves up by two (old 03 → new 05, old 62 → new 64). Image 01 is unchanged.
 
 The original source inventory is retained in docs/content/flocker-assets.json. Original URLs load where available; unavailable images keep their numbered placeholders.
 
-The Process section has been removed. It contained no image slots, so the numbering remains complete at 01–64 without gaps.
+The Process section has been removed. Impact now appears before the loneliness section with a new wide image slot, 65. Upload `image-65.png` (or another supported format) to replace it.
 
 ## Replacing An Image
 
@@ -78,3 +78,4 @@ For any other slot, upload `image-NN.png` (or WebP, JPG, JPEG, SVG, GIF), using 
 | 62 | 60 | Sign Up: Screen 1 | [Source](https://static.wixstatic.com/media/61817c_7723f72d6ec5444fbb21c8bc6694f5ab~mv2.png/v1/fill/w_156,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(40).png) |
 | 63 | 61 | Sign Up: Screen 2 | [Source](https://static.wixstatic.com/media/61817c_0a0182184495460b83ca32b97411ee1f~mv2.png/v1/fill/w_157,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(39).png) |
 | 64 | 62 | Sign Up: Screen 3 | [Source](https://static.wixstatic.com/media/61817c_0b82977ac897477fa084a8a4ac75d400~mv2.png/v1/fill/w_157,h_323,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/%F0%9F%96%BC%EF%B8%8F%20PLACE%20YOUR%20SCREEN%20HERE%20(38).png) |
+| 65 | New | Flocker Project Impact | New image slot |
